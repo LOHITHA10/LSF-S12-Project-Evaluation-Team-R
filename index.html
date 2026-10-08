@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="EF SET English certificates of Team R with scores and CEFR levels.">
+<title>EF SET Certificates of Team R</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800&display=swap">
+<style>
+/* Layout: one centred column. Hero with title left and waving cartoon girl right, then four score cards, then a scalloped footer. */
+:root {
+  --bg: #fff3f9; --bg2: #ffd9ea; --card: #ffffff;
+  --ink: #35235a; --muted: #7c6a95;
+  --hot: #ff4f93; --purple: #7e57c2; --pon: #ffffff; --lav: #b794e8;
+  --mint: #55d1b0; --peach: #ffa070; --sky: #5ab4ff; --yel: #ffd84d;
+  --on: #2b1747; --shadow: rgba(126, 87, 194, .28);
+  --display: 'Baloo 2', 'Trebuchet MS', system-ui, sans-serif;
+  --body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1f1230; --bg2: #3a1b55; --card: #2e1a47;
+    --ink: #fdeaf6; --muted: #c9b3dc;
+    --hot: #ff6aa9; --purple: #c3a8ff; --pon: #2b1747; --lav: #9a73e0;
+    --mint: #5fe0bd; --peach: #ffae82; --sky: #6cc0ff; --yel: #ffe066;
+    --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1f1230; --bg2: #3a1b55; --card: #2e1a47;
+  --ink: #fdeaf6; --muted: #c9b3dc;
+  --hot: #ff6aa9; --purple: #c3a8ff; --pon: #2b1747; --lav: #9a73e0;
+  --mint: #5fe0bd; --peach: #ffae82; --sky: #6cc0ff; --yel: #ffe066;
+  --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body {
+  background-color: var(--bg);
+  background-image: linear-gradient(180deg, var(--bg2), var(--bg) 70%);
+  color: var(--ink); font-family: var(--body); font-weight: 600;
+  overflow-x: clip;
+}
+.float { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.float svg {
+  position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s);
+  color: var(--k); fill: currentColor; opacity: .65;
+  animation: drift var(--t) ease-in-out infinite alternate; animation-delay: var(--d);
+}
+@keyframes drift { from { transform: translateY(0) rotate(-12deg); } to { transform: translateY(-30px) rotate(14deg); } }
+
+.wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 8px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 250px); gap: 8px 12px; align-items: center; }
+.tag {
+  display: inline-block; background: var(--purple); color: var(--pon);
+  font-family: var(--display); font-weight: 800; letter-spacing: .22em; font-size: .8rem;
+  padding: .35em 1.1em; border-radius: 99px; margin-bottom: 10px;
+}
+h1 { margin: 0; font-family: var(--display); font-weight: 800; line-height: .95; text-wrap: balance; }
+h1 .a { display: block; font-size: clamp(3.6rem, 14vw, 5.6rem); color: var(--hot); text-shadow: 3px 3px 0 var(--lav); }
+h1 .b { display: block; font-size: clamp(2.3rem, 9.5vw, 3.5rem); color: var(--hot); text-shadow: 3px 3px 0 var(--lav); }
+.ribbon {
+  display: inline-block; margin-top: 14px; background: var(--purple); color: var(--pon);
+  font-family: var(--display); font-weight: 800; font-size: 1.5rem;
+  padding: .1em .9em; border-radius: 99px; animation: wiggle 2.4s ease-in-out infinite;
+}
+@keyframes wiggle { from { transform: rotate(-3deg); } 50% { transform: rotate(2deg) scale(1.04); } to { transform: rotate(-3deg); } }
+
+.girl { position: relative; width: 100%; max-width: 250px; justify-self: center; background: none; border: 0; padding: 0; cursor: pointer; color: inherit; }
+.girl:focus-visible { outline: 3px solid var(--hot); outline-offset: 4px; border-radius: 20px; }
+.girl svg.art { display: block; width: 100%; height: auto; overflow: visible; }
+.bubble {
+  position: absolute; top: -4px; left: -8px; z-index: 2; max-width: 11em; text-align: left;
+  background: var(--card); color: var(--hot); border: 3px solid var(--hot); border-radius: 18px;
+  padding: .2em .7em; font-family: var(--display); font-weight: 800; font-size: 1.1rem; line-height: 1.2;
+  animation: pop .45s cubic-bezier(.2, .9, .3, 1.4);
+}
+.bubble::after {
+  content: ""; position: absolute; right: 14px; bottom: -11px; width: 14px; height: 14px;
+  background: var(--card); border-right: 3px solid var(--hot); border-bottom: 3px solid var(--hot);
+  transform: rotate(45deg) skew(8deg, 8deg);
+}
+@keyframes pop { from { transform: scale(.4) rotate(-8deg); } }
+
+.bob { transform-origin: 130px 290px; transform-box: view-box; animation: bob 2.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-7px); } }
+.wave { transform-origin: 160px 182px; transform-box: view-box; animation: wave .9s ease-in-out infinite alternate; }
+@keyframes wave { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.bow { transform-box: fill-box; transform-origin: center; animation: bowp 1.6s ease-in-out infinite alternate; }
+@keyframes bowp { to { transform: rotate(10deg) scale(1.1); } }
+.tail-l { transform-origin: 62px 105px; transform-box: view-box; animation: sway 2.4s ease-in-out infinite alternate; }
+.tail-r { transform-origin: 198px 105px; transform-box: view-box; animation: sway 2.4s ease-in-out infinite alternate-reverse; }
+@keyframes sway { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+.twinkle { transform-box: fill-box; transform-origin: center; animation: twinkle 1.6s ease-in-out infinite alternate; }
+@keyframes twinkle { from { transform: scale(.5) rotate(0); } to { transform: scale(1.15) rotate(25deg); } }
+
+.team h2 { font-family: var(--display); font-weight: 800; font-size: 1.7rem; color: var(--purple); margin: 26px 0 12px; display: flex; align-items: center; gap: 10px; }
+.team h2 svg { width: 22px; height: 22px; fill: var(--hot); }
+.cards { display: grid; gap: 16px; padding: 0; margin: 0; list-style: none; }
+.card {
+  background: var(--card); border: 3px solid var(--c); border-radius: 22px; padding: 14px 16px 16px;
+  box-shadow: 4px 5px 0 var(--shadow);
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 14px; align-items: center;
+  animation: rise .6s cubic-bezier(.2, .9, .3, 1.2) backwards; animation-delay: calc(var(--i) * .12s);
+  transition: transform .2s;
+}
+.card:hover { transform: translateY(-3px) rotate(-.6deg); }
+@keyframes rise { from { transform: translateY(26px) scale(.94); } }
+.badge {
+  width: 50px; height: 50px; border-radius: 50%; background: var(--c); color: var(--on);
+  display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 1.7rem;
+}
+.name { font-family: var(--display); font-weight: 800; font-size: 1.3rem; line-height: 1.1; color: var(--ink); overflow-wrap: anywhere; }
+.roll { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.score { text-align: center; }
+.pill {
+  display: inline-block; background: var(--c); color: var(--on); border-radius: 99px; padding: .05em .8em;
+  font-family: var(--display); font-weight: 800; font-size: 1.2rem; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.lvl { margin-top: 3px; font-size: .72rem; font-weight: 800; color: var(--ink); }
+.bars { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 22px; margin-top: 10px; }
+.bar { display: grid; grid-template-columns: 4.4rem minmax(0, 1fr) 3.5rem; align-items: center; gap: 8px; font-size: .78rem; color: var(--muted); font-weight: 800; }
+.track { height: 10px; border-radius: 99px; background: var(--bg2); overflow: hidden; }
+.fill { height: 100%; width: var(--w); border-radius: 99px; background: var(--c); transform-origin: left; animation: grow 1s .45s ease-out backwards; }
+@keyframes grow { from { transform: scaleX(0); } }
+.val { text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.fun { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 34px 0 6px; font-family: var(--display); font-weight: 800; font-size: 1.35rem; color: var(--purple); text-align: center; }
+.fun svg { width: 34px; height: 34px; flex: none; fill: var(--hot); animation: spin 9s linear infinite; }
+.fun svg + span + svg { fill: var(--lav); animation-direction: reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.foot { position: relative; z-index: 1; margin-top: 18px; }
+.scallop { height: 18px; background: radial-gradient(circle 17px at 50% 100%, var(--hot) 96%, transparent) 0 0 / 34px 18px repeat-x; }
+.band { background: var(--hot); color: var(--on); text-align: center; font-weight: 800; padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: .9rem; }
+
+@media (max-width: 560px) {
+  .hero { grid-template-columns: 1fr; }
+  .girl { max-width: 210px; }
+  .bars { grid-template-columns: 1fr; }
+  .card { grid-template-columns: auto minmax(0, 1fr); }
+  .score { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; text-align: left; }
+  .lvl { margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+.dl { text-align: center; margin: 20px 0 0; }
+.dl a {
+  display: inline-block; background: var(--purple); color: var(--pon); text-decoration: none;
+  font-family: var(--display); font-weight: 800; font-size: 1.1rem; padding: .5em 1.4em; border-radius: 99px;
+  box-shadow: 3px 4px 0 var(--shadow); transition: transform .2s;
+}
+.dl a:hover { transform: translateY(-2px) rotate(-1deg); }
+.dl a:focus-visible { outline: 3px solid var(--hot); outline-offset: 4px; }
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21C-4 9 4 -1 12 6C20 -1 28 9 12 21Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,1.5 14.9,8.6 22.5,9.2 16.7,14.2 18.6,21.6 12,17.6 5.4,21.6 7.3,14.2 1.5,9.2 9.1,8.6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 1L14.5 9.5L23 12L14.5 14.5L12 23L9.5 14.5L1 12L9.5 9.5Z"/></symbol>
+  <symbol id="i-flower" viewBox="0 0 24 24">
+    <circle cx="19" cy="12" r="4.6"/><circle cx="15.5" cy="18.06" r="4.6"/><circle cx="8.5" cy="18.06" r="4.6"/>
+    <circle cx="5" cy="12" r="4.6"/><circle cx="8.5" cy="5.94" r="4.6"/><circle cx="15.5" cy="5.94" r="4.6"/>
+    <circle cx="12" cy="12" r="3.6" style="fill:var(--yel)"/>
+  </symbol>
+</svg>
+
+<div class="float" id="float" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <span class="tag">ENGLISH PROJECT</span>
+      <h1><span class="a">EF SET</span><span class="b">Certificates</span></h1>
+      <span class="ribbon">of Team R</span>
+    </div>
+
+    <button class="girl" id="girl" type="button" aria-label="Tap the girl to hear what she says">
+      <span class="bubble" id="bubble" aria-live="polite">Hello!</span>
+      <svg class="art" viewBox="0 0 260 300" role="img" aria-label="Cartoon girl with pigtails waving and holding a book">
+        <use class="twinkle" href="#i-spark" x="8" y="20" width="26" height="26" style="fill:var(--yel)"/>
+        <use class="twinkle" href="#i-spark" x="228" y="214" width="22" height="22" style="fill:var(--lav);animation-delay:.5s"/>
+        <use class="twinkle" href="#i-heart" x="12" y="190" width="20" height="20" style="fill:var(--hot);animation-delay:.9s"/>
+        <g class="bob">
+          <g class="tail-l"><circle cx="62" cy="125" r="23" fill="#5a3320"/><circle cx="66" cy="104" r="7" fill="#ff4f93"/></g>
+          <g class="tail-r"><circle cx="198" cy="125" r="23" fill="#5a3320"/><circle cx="194" cy="104" r="7" fill="#ff4f93"/></g>
+          <ellipse cx="130" cy="112" rx="62" ry="68" fill="#5a3320"/>
+          <rect x="121" y="150" width="18" height="20" fill="#ffdcc2"/>
+          <path d="M96 165L164 165L194 288L66 288Z" fill="#ff4f93"/>
+          <circle cx="98" cy="262" r="5" fill="#fff"/><circle cx="162" cy="270" r="5" fill="#fff"/><circle cx="130" cy="280" r="5" fill="#fff"/>
+          <path d="M100 176L84 232" stroke="#ffdcc2" stroke-width="15" stroke-linecap="round" fill="none"/>
+          <rect x="90" y="206" width="80" height="52" rx="7" fill="#5ab4ff"/>
+          <rect x="96" y="212" width="68" height="7" rx="3" fill="#fff"/>
+          <polygon points="130,224 134,233 143,234 136,240 138,249 130,244 122,249 124,240 117,234 126,233" fill="#ffd84d"/>
+          <circle cx="84" cy="236" r="10" fill="#ffdcc2"/>
+          <g class="wave">
+            <path d="M160 182L212 140" stroke="#ffdcc2" stroke-width="15" stroke-linecap="round" fill="none"/>
+            <circle cx="216" cy="136" r="11" fill="#ffdcc2"/>
+          </g>
+          <circle cx="130" cy="110" r="50" fill="#ffdcc2"/>
+          <path d="M79 106C76 48 184 48 181 106C172 86 152 80 130 86C108 80 88 86 79 106Z" fill="#5a3320"/>
+          <circle cx="104" cy="88" r="11" fill="#5a3320"/><circle cx="130" cy="92" r="11" fill="#5a3320"/><circle cx="156" cy="88" r="11" fill="#5a3320"/>
+          <ellipse class="blink" cx="112" cy="114" rx="6" ry="8" fill="#3a2a4a"/>
+          <ellipse class="blink" cx="148" cy="114" rx="6" ry="8" fill="#3a2a4a"/>
+          <circle cx="114" cy="111" r="2.2" fill="#fff"/><circle cx="150" cy="111" r="2.2" fill="#fff"/>
+          <circle cx="94" cy="130" r="8" fill="#ff8fb8" opacity=".55"/><circle cx="166" cy="130" r="8" fill="#ff8fb8" opacity=".55"/>
+          <path d="M120 131Q130 143 140 131" stroke="#3a2a4a" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <g class="bow">
+            <polygon points="176,64 200,52 200,76" fill="#ff4f93"/><polygon points="176,64 152,52 152,76" fill="#ff4f93"/>
+            <circle cx="176" cy="64" r="7" fill="#d81b72"/>
+          </g>
+        </g>
+      </svg>
+    </button>
+  </header>
+
+  <section class="team" aria-labelledby="team-h">
+    <h2 id="team-h"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>Meet Our Team</h2>
+    <ol class="cards" id="cards"></ol>
+  </section>
+
+  <p class="fun">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-flower"/></svg>
+    <span>Learning English is fun!</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-flower"/></svg>
+  </p>
+  <p class="dl"><a href="EF-SET-Certificates-of-Team-R.pdf" download>Download all certificates (PDF)</a></p>
+</main>
+
+<footer class="foot">
+  <div class="scallop" aria-hidden="true"></div>
+  <div class="band">EF SET English Certificate &nbsp;|&nbsp; October 2026 &nbsp;|&nbsp; Team R</div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var team = [
+    { roll: '2620080007', name: 'Vemuluri Lohitha', score: 75, level: 'C2 Proficient', c: '--hot',
+      skills: [['Reading', 100, 'C2'], ['Listening', 72, 'C2'], ['Writing', 59, 'B2'], ['Speaking', 69, 'C1']] },
+    { roll: '2620080008', name: 'Sundi Manilatha', score: 56, level: 'B2 Upper Intermediate', c: '--mint',
+      skills: [['Reading', 78, 'C2'], ['Listening', 42, 'B1'], ['Writing', 52, 'B2'], ['Speaking', 53, 'B2']] },
+    { roll: '2620080080', name: 'Sneha Kumari', score: 72, level: 'C2 Proficient', c: '--peach',
+      skills: [['Reading', 83, 'C2'], ['Listening', 67, 'C1'], ['Writing', 76, 'C2'], ['Speaking', 60, 'B2']] },
+    { roll: '2620080081', name: 'Nalla Santhoshi', score: 62, level: 'C1 Advanced', c: '--sky',
+      skills: [['Reading', 73, 'C2'], ['Listening', 63, 'C1'], ['Writing', 65, 'C1'], ['Speaking', 46, 'B1']] }
+  ];
+
+  var list = document.getElementById('cards');
+  list.innerHTML = team.map(function (m, i) {
+    var bars = m.skills.map(function (s) {
+      return '<div class="bar"><span>' + s[0] + '</span><span class="track"><span class="fill" style="display:block;--w:' + s[1] + '%"></span></span><span class="val">' + s[1] + ' · ' + s[2] + '</span></div>';
+    }).join('');
+    return '<li class="card" style="--c:var(' + m.c + ');--i:' + i + '">' +
+      '<div class="badge">' + (i + 1) + '</div>' +
+      '<div><div class="name">' + m.name + '</div><div class="roll">Roll No: ' + m.roll + '</div></div>' +
+      '<div class="score"><span class="pill"><span class="num" data-v="' + m.score + '">' + m.score + '</span> / 100</span><div class="lvl">' + m.level + '</div></div>' +
+      '<div class="bars">' + bars + '</div></li>';
+  }).join('');
+
+  // Score count-up
+  if (!reduce) {
+    var nums = list.querySelectorAll('.num');
+    var t0 = null;
+    nums.forEach(function (n) { n.textContent = '0'; });
+    var tick = function (t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 1100);
+      var e = 1 - Math.pow(1 - p, 3);
+      nums.forEach(function (n) { n.textContent = Math.round(n.dataset.v * e); });
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // Floating hearts, stars, sparkles and flowers
+  var layer = document.getElementById('float');
+  var shapes = ['i-heart', 'i-star', 'i-spark', 'i-flower', 'i-heart', 'i-spark'];
+  var colors = ['--hot', '--lav', '--yel', '--sky', '--mint', '--peach'];
+  var html = '';
+  for (var k = 0; k < 18; k++) {
+    var size = 14 + Math.round(Math.random() * 20);
+    html += '<svg viewBox="0 0 24 24" style="--x:' + Math.round(Math.random() * 96) + '%;--y:' + Math.round(Math.random() * 94) +
+      '%;--s:' + size + 'px;--k:var(' + colors[k % colors.length] + ');--t:' + (3 + Math.random() * 4).toFixed(1) +
+      's;--d:-' + (Math.random() * 5).toFixed(1) + 's"><use href="#' + shapes[k % shapes.length] + '"/></svg>';
+  }
+  layer.innerHTML = html;
+
+  // Speech bubble cycles on tap and on its own
+  var lines = ['Hello!', 'Hi, we are Team R!', 'English is fun!', 'Check our scores!', 'Great job, team!'];
+  var at = 0;
+  var bubble = document.getElementById('bubble');
+  function say() {
+    at = (at + 1) % lines.length;
+    var fresh = bubble.cloneNode(false);
+    fresh.textContent = lines[at];
+    bubble.replaceWith(fresh);
+    bubble = fresh;
+  }
+  document.getElementById('girl').addEventListener('click', say);
+  if (!reduce) setInterval(say, 4500);
+})();
+</script>
+
+</body>
+</html>
